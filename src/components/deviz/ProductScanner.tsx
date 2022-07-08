@@ -172,13 +172,12 @@ const ProductScanner = () => {
       setProdus({ ...produs, CodBara: clipText });
     }
     catch (err) {
-        alertError("Nu ati acordat permisiunea pentru citirea din clipboard. " + err);
-      }
+      alertError("Nu ati acordat permisiunea pentru citirea din clipboard. " + err);
+    }
   }
 
-  function rescanProdus() {
-    setScanat(false);
-    setProdus(PRODUS_INIT_VALS);
+  function handleScannedBarcode(code: string) {
+    setProdus({ ...produs, CodBara: code })
   }
 
   return (
@@ -200,60 +199,15 @@ const ProductScanner = () => {
         </button>
         <ProductsModal loading={loadingProduse} produse={produse} />
 
-        {scanat === false ? (
-          <div className="dropdown">
-            <button
-              style={{ width: "100%" }}
-              className="mx-0 btn btn-secondary btn-lg dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton-cameras"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Selecteaza camera
-            </button>
-            <div
-              className="dropdown-menu"
-              aria-labelledby="dropdownMenuButton-cameras"
-            >
-              {devices.map((dev: any) => (
-                <div
-                  key={dev.deviceId}
-                  className={`dropdown-item ${dev.deviceId === cameraId ? "active" : ""
-                    }`}
-                  onClick={() => {
-                    setCameraId(dev.deviceId);
-                    localStorage.setItem("camera", dev.deviceId);
-                  }}
-                >
-                  {dev.label}
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <button
-            onClick={rescanProdus}
-            className="btn btn-secondary btn-lg col-12 m-0 shadow"
-          >
-            Scaneaza alt produs
-          </button>
-        )}
-
         <div className="alert alert-success" role="alert">
           Vizualizarea camerei s-ar putea sa necesite timp, va rugam sa
           asteptati dupa selectarea acesteia.
         </div>
-        {cameraId === "" ? (
-          <></>
-        ) : (
-          <BarcodeComponent
-            BarCodeOnUpdate={BarCodeOnUpdate}
-            cameraId={cameraId}
-            scanat={scanat}
-          />
-        )}
+
+        {/* <BarcodeComponent
+          handleScannedBarcode={handleScannedBarcode}
+        /> */}
+
         <button
           disabled={loading}
           onClick={CopyFromClipboard}

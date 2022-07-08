@@ -1,27 +1,33 @@
+//@ts-nocheck
+
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { Html5QrcodeScanner } from 'html5-qrcode'
 
 interface Props {
-  cameraId: string;
-  BarCodeOnUpdate: any;
-  scanat: boolean;
+  handleScannedBarcode: (string) => void
 }
 
-function BarcodeComponent({ cameraId, BarCodeOnUpdate, scanat }: Props) {
-  if (!scanat)
-    return (
-      <BarcodeScannerComponent
-        width="100%"
-        height={300}
-        facingMode="environment"
-        stopStream={scanat}
-        videoConstraints={{
-          deviceId: cameraId,
-        }}
-        onUpdate={BarCodeOnUpdate}
-      />
+function BarcodeComponent({ handleScannedBarcode }: Props) {
+  const qrReaderRef = useRef();
+
+  function onScanSuccess(decodedText: string, decodedResult: string) {
+    console.log(`Code scanned = ${decodedText}`, decodedResult);
+    handleScannedBarcode(decodedText)
+  }
+
+  useEffect(() => {
+    const html5QrcodeScanner = new Html5QrcodeScanner(
+      qrReaderRef.current.id, { fps: 10, qrbox: 250 }
     );
-  else return <></>;
+    html5QrcodeScanner.render(onScanSuccess);
+  }, [])
+
+  return (
+    <div className="col-12 d-flex justify-content-center">
+      <div id="qr-reader" style={{ width: 400}} ref={qrReaderRef}></div>
+    </div>
+  )
 }
 
 export default BarcodeComponent;

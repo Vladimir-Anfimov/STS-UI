@@ -36,7 +36,7 @@ function TehnicAcces({ match, history }: any) {
     primesteDateAcces(account.token, IdDecont, account.CodSal)
       .then((res: any) => {
         // PRIMESC ID PROIECT SI IL FOLOSESC LA MODIFICARE PAROLE
-        if (res.parole.alarmaInstallerCode === "Nealocat") {
+        if (res.parole.alarmaInstallerCode === "Neautorizat") {
           alertWarning("Proiectul nu a fost alocat.");
           history.push("/devize");
         } else setData(res.parole);

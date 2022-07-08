@@ -2,8 +2,8 @@ import React from 'react';
 import Spinner from '../layout/Spinner';
 import { PersoanaLegaturaDeviz } from './DevizBasic';
 
-export const PersoaneLegaturaModal = ({ persoaneLegatura, persLoaded }:any) => {
-return (
+export const PersoaneLegaturaModal = ({ persoaneLegatura, persLoaded }: any) => {
+    return (
         // @ts-ignore
         <div className="modal fade" id="exampleModal3" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -18,10 +18,10 @@ return (
                         {persLoaded === true && persoaneLegatura.length === 0 ? (<b className='text-center'>Nu exista persoane de legatura.</b>) : (
                             persLoaded === false ? (<Spinner />) : (
                                 <ul className="list-group">
-                                    {persoaneLegatura.map((persoana:PersoanaLegaturaDeviz)=><li key={persoana.persoanaDeLegatura + Math.random()} className="list-group-item">
-                                        {persoana.persoanaDeLegatura ? <><b>{persoana.persoanaDeLegatura}</b><br/></> : <></>}
-                                        {persoana.telefon1 ? <><b>{persoana.telefon1}</b><br/></> : <></>}
-                                        {persoana.telefon2 ? <><b>{persoana.telefon2}</b><br/></> : <></>}
+                                    {persoaneLegatura.map((persoana: PersoanaLegaturaDeviz) => <li key={persoana.persoanaDeLegatura + Math.random()} className="list-group-item">
+                                        {persoana.persoanaDeLegatura ? <><b>{persoana.persoanaDeLegatura}</b><br /></> : <></>}
+                                        {persoana.telefon1 ? <><b>{persoana.telefon1}</b><br /></> : <></>}
+                                        {persoana.telefon2 ? <><b>{persoana.telefon2}</b><br /></> : <></>}
                                     </li>)}
                                 </ul>
                             )
