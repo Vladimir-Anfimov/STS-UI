@@ -29,6 +29,10 @@ function Navbar({ history }: any) {
             <img src="https://img.icons8.com/wired/64/000000/add-list.png" />{" "}
             Ordin servici
           </li>
+          <li onClick={() => history.push(`/produse`)}>
+            <img src="https://img.icons8.com/ios/50/000000/product--v2.png" />{" "}
+            Produse
+          </li>
           <li onClick={() => history.push(`/parteneri`)}>
             <img src="https://img.icons8.com/dotty/80/000000/teamwork.png" />{" "}
             Parteneri
@@ -84,6 +88,16 @@ function Navbar({ history }: any) {
                 src="https://img.icons8.com/wired/64/000000/add-list.png"
               />{" "}
               Ordin servici
+            </a>
+            <a
+              onClick={() => history.push(`/produse`)}
+              className="nav-item nav-link active"
+            >
+              <img
+                className="ICON-IMG-PHONE"
+                src="https://img.icons8.com/ios/50/000000/product--v2.png"
+              />{" "}
+              Produse
             </a>
             <a
               onClick={() => history.push(`/parteneri`)}

@@ -28,6 +28,8 @@ import {
   AlertInternetRestabilit,
 } from "../utils/AlertTypes";
 import ProductScanner from "./deviz/ProductScanner";
+import BarcodeComponent from "./deviz/BarcodeComponent";
+import ProduseController from "./produse/ProduseController";
 
 function App() {
   useEffect(() => {
@@ -130,6 +132,15 @@ function App() {
         path="/parteneri"
         exact
         component={ParteneriController}
+      />
+
+      {/*  */}
+      <PrivateRoute
+        requiredStartedPontaj={true}
+        requiredRoles={DEVIZE_ROLURI}
+        path="/produse"
+        exact
+        component={ProduseController}
       />
 
       {/*  */}

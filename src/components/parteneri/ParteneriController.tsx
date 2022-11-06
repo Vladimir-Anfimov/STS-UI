@@ -5,6 +5,7 @@ import { cautaParteneri } from "../../api/parteneriApi";
 import ParteneriList from "./ParteneriList";
 import Spinner from "../layout/Spinner";
 import ParteneriContext from "../../store/ParteneriStore";
+import { SearchIcon } from "../../utils/Icons";
 
 function ParteneriController() {
   const { account } = useContext<any>(AccountContext);
@@ -20,13 +21,6 @@ function ParteneriController() {
       [e.target.name]: e.target.value,
     });
   }
-
-  const SearchIcon: React.FC = () => (
-    <img
-      className="ICON ml-0"
-      src="https://img.icons8.com/color/48/000000/search.png"
-    />
-  );
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
