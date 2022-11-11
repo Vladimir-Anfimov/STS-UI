@@ -30,6 +30,7 @@ import {
 import ProductScanner from "./deviz/ProductScanner";
 import BarcodeComponent from "./deviz/BarcodeComponent";
 import ProduseController from "./produse/ProduseController";
+import ActivitatiController from "./activitati/ActivitatiController";
 
 function App() {
   useEffect(() => {
@@ -60,6 +61,15 @@ function App() {
         exact
         component={HomeController}
       />
+      {/*  */}
+      <PrivateRoute
+        requiredStartedPontaj={false}
+        requiredRoles={PONTAJ_ROLURI}
+        path="/activitati"
+        exact
+        component={ActivitatiController}
+      />
+
       {/*  */}
       <PrivateRoute
         requiredStartedPontaj={false}

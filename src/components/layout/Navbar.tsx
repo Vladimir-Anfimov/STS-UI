@@ -25,6 +25,10 @@ function Navbar({ history }: any) {
             <img src="https://img.icons8.com/ios/50/000000/window-settings.png" />{" "}
             Pontaj
           </li>
+          <li onClick={() => history.push(`/activitati`)}>
+            <img src="https://img.icons8.com/ios-glyphs/60/null/todo-list--v1.png" />
+            Activitati
+          </li>
           <li onClick={() => history.push(`/devize`)}>
             <img src="https://img.icons8.com/wired/64/000000/add-list.png" />{" "}
             Ordin servici
@@ -78,6 +82,16 @@ function Navbar({ history }: any) {
                 src="https://img.icons8.com/ios/50/000000/window-settings.png"
               />{" "}
               Pontaj
+            </a>
+            <a
+              onClick={() => history.push(`/activitati`)}
+              className="nav-item nav-link active"
+            >
+              <img
+                className="ICON-IMG-PHONE"
+                src="https://img.icons8.com/ios-glyphs/60/null/todo-list--v1.png"
+              />{" "}
+              Activitati
             </a>
             <a
               onClick={() => history.push(`/devize`)}

@@ -10,6 +10,9 @@ import { ParteneriProvider } from "./store/ParteneriStore";
 import { LastLocationProvider } from "react-router-last-location";
 import { DevizTemporaryStateProvider } from "./store/DevizStore";
 import { register } from "./serviceWorker";
+import { registerLicense } from "@syncfusion/ej2-base";
+
+registerLicense(process.env.REACT_APP_SYNCFUSION_KEY!);
 
 ReactDOM.render(
   <AccountProvider>
