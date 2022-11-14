@@ -253,15 +253,6 @@ function DevizBasic({ deviz, setDeviz, changeHistory }: Props) {
                   onClick={() => changeHistory("produs")}
                 >
                   Scaneaza produs{" "}
-                  <span
-                    style={{
-                      color: "yellow",
-                      fontWeight: "bold",
-                      display: "inline",
-                    }}
-                  >
-                    BETA
-                  </span>
                 </button>
                 <PersoaneLegaturaModal
                   persoaneLegatura={persoaneLegatura}

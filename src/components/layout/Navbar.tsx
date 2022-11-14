@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { askIfSure } from "../../utils/AlertTypes";
 import AccountContext from "../../store/AccountStore";
+import BetaTag from "../multiused/BetaTag";
 
 function Navbar({ history }: any) {
   const { changeUserSession }: any = useContext(AccountContext);
@@ -28,6 +29,7 @@ function Navbar({ history }: any) {
           <li onClick={() => history.push(`/activitati`)}>
             <img src="https://img.icons8.com/ios-glyphs/60/null/todo-list--v1.png" />
             Activitati
+            <BetaTag />
           </li>
           <li onClick={() => history.push(`/devize`)}>
             <img src="https://img.icons8.com/wired/64/000000/add-list.png" />{" "}
@@ -92,6 +94,7 @@ function Navbar({ history }: any) {
                 src="https://img.icons8.com/ios-glyphs/60/null/todo-list--v1.png"
               />{" "}
               Activitati
+              <BetaTag />
             </a>
             <a
               onClick={() => history.push(`/devize`)}
