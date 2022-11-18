@@ -28,7 +28,6 @@ import {
   AlertInternetRestabilit,
 } from "../utils/AlertTypes";
 import ProductScanner from "./deviz/ProductScanner";
-import BarcodeComponent from "./deviz/BarcodeComponent";
 import ProduseController from "./produse/ProduseController";
 import ActivitatiController from "./activitati/ActivitatiController";
 
