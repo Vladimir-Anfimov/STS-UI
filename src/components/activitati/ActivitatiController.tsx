@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { extend } from "@syncfusion/ej2-base";
 import {
   KanbanComponent,
   ColumnsDirective,
@@ -7,13 +6,18 @@ import {
   CardClickEventArgs,
 } from "@syncfusion/ej2-react-kanban";
 import "./kanban.css";
-import * as dataSource from "./datasource.json";
 import Spinner from "../layout/Spinner";
 import AccountContext from "../../store/AccountStore";
 import { incarcaActivitati } from "../../api/activitatiApi";
 import { alertError } from "../../utils/AlertTypes";
 import { jwtDecode } from "jwt-js-decode";
-import { EvidentaActivitati } from "./ActivitatiTypes";
+import { EvidentaActivitate, IKanbanActivitate } from "./ActivitatiTypes";
+import {
+  configureColor,
+  configureDetails,
+  configureStatus,
+} from "./ActivitatiFunctions";
+import { useHistory } from "react-router-dom";
 
 export interface IInterogareActivitati {
   CodSal: number;
@@ -22,6 +26,7 @@ export interface IInterogareActivitati {
 }
 
 export default function ActivitatiController() {
+  const history = useHistory();
   const { account } = useContext<any>(AccountContext);
   const [loading, setLoading] = useState(true);
   const [interogare, setInterogare] = useState<IInterogareActivitati>({
@@ -29,18 +34,20 @@ export default function ActivitatiController() {
     DeLa: new Date(2022, 0, 1),
     PanaLa: new Date(2022, 12, 31),
   });
+  const [activitati, setActivitati] = useState<IKanbanActivitate[]>([]);
 
-  const [data, setData] = useState<Object[]>(
-    extend(
-      [],
-      (dataSource as { [key: string]: Object }).kanbanData,
-      undefined,
-      true
-    ) as Object[]
-  );
-
-  function transformaActivitati(activitatiDb: EvidentaActivitati[]) {
+  function transformaActivitati(activitatiDb: EvidentaActivitate[]) {
     console.log(activitatiDb);
+    const _activitati = activitatiDb.map((x) => ({
+      Id: x.subiect,
+      TodoId: x.idActivitate,
+      Summary: configureDetails(x.detalii),
+      ClassName: "",
+      Color: configureColor(x.prioritate),
+      Status: configureStatus(x.stare),
+      Tags: `Prioritate ${x.prioritateStr.toLowerCase()},`,
+    })) as IKanbanActivitate[];
+    setActivitati(_activitati);
   }
 
   useEffect(() => {
@@ -54,11 +61,15 @@ export default function ActivitatiController() {
 
   const handleDoubleClick = (args: CardClickEventArgs) => {
     console.log("click", args);
+    history.push(`/activitati/${args.data.TodoId}`);
   };
 
   const columnTemplate = (props: { [key: string]: string }): JSX.Element => {
     return (
-      <div className="header-template-wrap" style={{ cursor: "pointer" }}>
+      <div
+        className="header-template-wrap"
+        style={{ cursor: "pointer", fontSize: 20 }}
+      >
         <div className={"header-icon e-icons " + props.keyField}></div>
         <div className="header-text">{props.headerText}</div>
       </div>
@@ -83,7 +94,7 @@ export default function ActivitatiController() {
               cssClass="kanban-header"
               id="kanban"
               keyField="Status"
-              dataSource={data}
+              dataSource={activitati}
               cardSettings={{
                 contentField: "Summary",
                 headerField: "Id",

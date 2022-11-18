@@ -2,17 +2,12 @@
   "kanbanData": [
       {
           "Id": "Task 1",
-          "Title": "Task - 29001",
           "Status": "Open",
           "Summary": "Analyze the new requirements gathered from the customer.",
-          "Type": "Story",
-          "Priority": "Low",
           "Tags": "Analyze,Customer",
-          "Estimate": 3.5,
-          "Assignee": "Nancy Davloio",
-          "RankId": 2,
           "Color": "#02897B",
-          "ClassName": "e-story, e-low, e-nancy-davloio"
+          "ClassName": "",
+          "TodoId": 1
       },
       {
           "Id": "Task 2",
@@ -25,8 +20,8 @@
           "Estimate": 6,
           "Assignee": "Andrew Fuller",
           "RankId": 1,
-          "Color": "#673AB8",
-          "ClassName": "e-improvement, e-normal, e-andrew-fuller"
+          "Color": "#02897B",
+          "ClassName": ""
       },
       {
           "Id": "Task 3",
@@ -56,35 +51,7 @@
           "Color": "#E64A19",
           "ClassName": "e-bug, e-release, e-janet-leverling"
       },
-      {
-          "Id": "Task 5",
-          "Title": "Task - 29005",
-          "Status": "Review",
-          "Summary": "Fix the issues reported by the customer.",
-          "Type": "Bug",
-          "Priority": "Low",
-          "Tags": "Customer",
-          "Estimate": "3.5",
-          "Assignee": "Steven walker",
-          "RankId": 1,
-          "Color": "#E64A19",
-          "ClassName": "e-bug, e-low, e-steven-walker"
-      },
-      {
-          "Id": "Task 6",
-          "Title": "Task - 29007",
-          "Status": "Validate",
-          "Summary": "Validate new requirements",
-          "Type": "Improvement",
-          "Priority": "Low",
-          "Tags": "Validation",
-          "Estimate": 1.5,
-          "Assignee": "Robert King",
-          "RankId": 1,
-          "Color": "#673AB8",
-          "ClassName": "e-improvement, e-low, e-robert-king"
-      },
-      {
+           {
           "Id": "Task 7",
           "Title": "Task - 29009",
           "Status": "Review",

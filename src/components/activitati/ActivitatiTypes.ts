@@ -1,4 +1,4 @@
-export interface EvidentaActivitati {
+export interface EvidentaActivitate {
   stare: number;
   stareStr: string;
   prioritate: number;
@@ -13,10 +13,10 @@ export interface EvidentaActivitati {
   minuteDurataEstimata: number;
   idDeviz: number;
   anDeviz: number;
-  dateDeviz: EvidentaDevize;
+  dateDeviz: EvidentaDeviz;
 }
 
-export interface EvidentaDevize {
+export interface EvidentaDeviz {
   pozitia: number;
   idDeviz: number;
   numarDeviz: number;
@@ -40,4 +40,17 @@ export interface IInterogareActivitati {
   CodSal: number;
   DeLa: Date;
   PanaLa: Date;
+}
+
+export type IStatusKanban = "Open" | "InProgress" | "Close";
+export type IColorKanban = "blue" | "red" | "orange";
+
+export interface IKanbanActivitate {
+  Id: string;
+  Status: IStatusKanban;
+  Summary: string;
+  Tags: string;
+  Color: string;
+  ClassName: "";
+  TodoId: number;
 }
