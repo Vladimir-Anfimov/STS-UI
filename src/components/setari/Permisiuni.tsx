@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-js-decode";
+import React, { useContext, useEffect, useState } from "react";
+import AccountContext from "../../store/AccountStore";
 import { alertError } from "../../utils/AlertTypes";
 import Spinner from "../layout/Spinner";
 
 const Permisiuni = () => {
+  const { account } = useContext<any>(AccountContext);
+  const [roluri, setRoluri] = useState<string[]>([]);
   const [permisiuni, setPermisiuni] = useState({
     camera: "",
     geolocatie: "",
@@ -11,6 +15,7 @@ const Permisiuni = () => {
 
   useEffect(() => {
     queryPermissions();
+    getUtilizatorRoluri();
   }, []);
 
   const queryPermissions = async () => {
@@ -27,6 +32,13 @@ const Permisiuni = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const getUtilizatorRoluri = () => {
+    const _roluri = jwtDecode(account.token).payload[
+      process.env.REACT_APP_USER_TOKEN_ROLES!
+    ];
+    setRoluri(_roluri);
   };
 
   const ReformatTextPermission = (text: string) => {
@@ -58,6 +70,17 @@ const Permisiuni = () => {
             <b>Geolocatie:</b> {ReformatTextPermission(permisiuni.geolocatie)}
           </p>
         </>
+      )}
+      <b>Roluri: </b>
+      {roluri.length === 0 ? (
+        <Spinner />
+      ) : (
+        roluri.map((rol, index) => (
+          <span key={rol}>
+            {rol}
+            {index < roluri.length - 1 && <>,</>}{" "}
+          </span>
+        ))
       )}
       <hr className="my-4" />
       <div className="alert alert-success" role="alert">

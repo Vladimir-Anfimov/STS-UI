@@ -52,7 +52,7 @@ export function incarcaDevizeGPS(
     .catch(handleError);
 }
 
-export function startActivitate(
+export function startActivitateDeviz(
   token: string,
   startAct: IStartAct
 ): Promise<any> {
@@ -68,7 +68,10 @@ export function startActivitate(
     .catch(handleError);
 }
 
-export function stopActivitate(token: string, stopAct: IStopAct): Promise<any> {
+export function stopActivitateDeviz(
+  token: string,
+  stopAct: IStopAct
+): Promise<any> {
   console.log(stopAct);
   return fetch(apiURL + "/devize/stopact", {
     method: "POST",

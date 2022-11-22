@@ -92,8 +92,15 @@ export function closeAlert() {
 }
 
 export function AlertInternetRestabilit() {
+  AlertNotification("success", "Conexiune restabilităj");
+}
+
+export function AlertNotification(
+  icon: "success" | "error" | "warning" | "info" | "question",
+  title: string
+) {
   Toast.fire({
-    icon: "success",
-    title: "Conexiune restabilită",
+    icon,
+    title,
   });
 }

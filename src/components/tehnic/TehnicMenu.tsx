@@ -31,7 +31,7 @@ function TehnicMenu({ history, match }: any) {
         break;
       case "-4":
         alertWarning(`Activitatea nu are deviz alocat. Cod: ${code}`);
-        history.push("/devize");
+        history.push("/activitati");
         break;
       default:
         setAccess(1);
@@ -43,13 +43,13 @@ function TehnicMenu({ history, match }: any) {
     const fetchParams: ITehnicFetchParams = {
       CodSal: account.CodSal,
       IdDecont: Number(id_deviz),
+      IdTodo: 0,
     };
 
     accessTehnic(account.token, fetchParams)
       .then((res) => HandleAcces(res.rezultat))
       .catch((err) => {
-        console.log(err);
-        alertError("A aparut o eroare la solicitarea drepturilor.");
+        alertError("A aparut o eroare la solicitarea drepturilor. " + err);
       });
   }, []);
 

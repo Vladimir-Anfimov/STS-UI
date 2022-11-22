@@ -40,6 +40,7 @@ function TehnicConstatari({
       const params: ITehnicFetchParams = {
         CodSal: account.CodSal,
         IdDecont: id_deviz,
+        IdTodo: 0,
       };
       incarcaConstatari(account.token, params)
         .then((res) => {
@@ -74,6 +75,7 @@ function TehnicConstatari({
       const params: ITehnicFetchParams = {
         CodSal: account.CodSal,
         IdDecont: id_deviz,
+        IdTodo: 0,
       };
       trimiteConstatari(account.token, constatari, params)
         .then((res: any) => {

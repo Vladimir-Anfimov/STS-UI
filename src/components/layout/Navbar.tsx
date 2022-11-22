@@ -14,11 +14,29 @@ function Navbar({ history }: any) {
       history.push("/login");
     });
   }
+
+  const BusinessTitle = () => (
+    <span className="text-white" style={{ fontSize: 20 }}>
+      ALGOCONT.
+      <span
+        style={{
+          color: "yellow",
+          fontWeight: "bold",
+          display: "inline",
+        }}
+      >
+        NET
+      </span>
+    </span>
+  );
+
   return (
     <>
       <div className="SIDE-BAR shadow">
         <div onClick={() => history.push(`/`)}>
-          <p style={{ fontWeight: 400 }}>ALGOCONT.NET</p>
+          <p style={{ fontWeight: 400 }}>
+            <BusinessTitle />
+          </p>
         </div>
         <hr />
         <ul>
@@ -58,9 +76,9 @@ function Navbar({ history }: any) {
         <a
           style={{ fontWeight: 400 }}
           onClick={() => history.push(`/pontaj`)}
-          className="navbar-brand text-white"
+          className="navbar-brand"
         >
-          ALGOCONT.NET
+          <BusinessTitle />
         </a>
         <button
           className="navbar-toggler "

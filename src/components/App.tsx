@@ -30,6 +30,7 @@ import {
 import ProductScanner from "./deviz/ProductScanner";
 import ProduseController from "./produse/ProduseController";
 import ActivitatiController from "./activitati/ActivitatiController";
+import ActivitateController from "./activitate/ActivitateController";
 
 function App() {
   useEffect(() => {
@@ -62,7 +63,14 @@ function App() {
       />
       {/*  */}
       <PrivateRoute
-        requiredStartedPontaj={false}
+        requiredStartedPontaj={true}
+        requiredRoles={PONTAJ_ROLURI}
+        path="/activitati/:id_activitate"
+        exact
+        component={ActivitateController}
+      />
+      <PrivateRoute
+        requiredStartedPontaj={true}
         requiredRoles={PONTAJ_ROLURI}
         path="/activitati"
         exact

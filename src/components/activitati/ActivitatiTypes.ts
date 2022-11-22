@@ -13,7 +13,10 @@ export interface EvidentaActivitate {
   minuteDurataEstimata: number;
   idDeviz: number;
   anDeviz: number;
-  dateDeviz: EvidentaDeviz;
+  responsabilActivitate: number;
+  idActivitateInceputa: number;
+
+  dateDeviz: EvidentaDeviz | null;
 }
 
 export interface EvidentaDeviz {
@@ -38,8 +41,8 @@ export interface EvidentaDeviz {
 
 export interface IInterogareActivitati {
   CodSal: number;
-  DeLa: Date;
-  PanaLa: Date;
+  DeLa: string;
+  PanaLa: string;
 }
 
 export type IStatusKanban = "Open" | "InProgress" | "Close";
@@ -53,4 +56,5 @@ export interface IKanbanActivitate {
   Color: string;
   ClassName: "";
   TodoId: number;
+  idDeviz: number;
 }

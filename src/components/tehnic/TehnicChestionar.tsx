@@ -42,6 +42,7 @@ function TehnicChestionar({
       const params: ITehnicFetchParams = {
         CodSal: account.CodSal,
         IdDecont: id_deviz,
+        IdTodo: 0,
       };
       incarcaChestionar(account.token, params)
         .then((res: any) => {

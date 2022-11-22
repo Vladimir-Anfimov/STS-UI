@@ -7,6 +7,7 @@ import { IAccesData } from "../components/tehnic/TehnicAcces";
 export interface ITehnicFetchParams {
   CodSal: number;
   IdDecont: number;
+  IdTodo: number;
 }
 
 export function accessTehnic(

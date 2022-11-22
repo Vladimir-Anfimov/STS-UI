@@ -8,59 +8,80 @@ import {
 import "./kanban.css";
 import Spinner from "../layout/Spinner";
 import AccountContext from "../../store/AccountStore";
-import { incarcaActivitati } from "../../api/activitatiApi";
-import { alertError } from "../../utils/AlertTypes";
 import { jwtDecode } from "jwt-js-decode";
-import { EvidentaActivitate, IKanbanActivitate } from "./ActivitatiTypes";
+import {
+  EvidentaActivitate,
+  IInterogareActivitati,
+  IKanbanActivitate,
+} from "./ActivitatiTypes";
 import {
   configureColor,
   configureDetails,
   configureStatus,
 } from "./ActivitatiFunctions";
 import { useHistory } from "react-router-dom";
-
-export interface IInterogareActivitati {
-  CodSal: number;
-  DeLa: Date;
-  PanaLa: Date;
-}
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  updateActivitati,
+  updateIsLoaded,
+} from "../../redux/slices/ActivitatiSlice";
+import { incarcaActivitati } from "../../api/activitatiApi";
+import { alertError } from "../../utils/AlertTypes";
 
 export default function ActivitatiController() {
+  const activitatiState = useAppSelector((state) => state.activitati);
+  const dispatch = useAppDispatch();
+
   const history = useHistory();
   const { account } = useContext<any>(AccountContext);
-  const [loading, setLoading] = useState(true);
   const [interogare, setInterogare] = useState<IInterogareActivitati>({
     CodSal: Number(jwtDecode(account.token).payload.id),
-    DeLa: new Date(2022, 0, 1),
-    PanaLa: new Date(2022, 12, 31),
+    DeLa: new Date(2022, 0, 1).toJSON(),
+    PanaLa: new Date(2022, 12, 31).toJSON(),
   });
-  const [activitati, setActivitati] = useState<IKanbanActivitate[]>([]);
-
-  function transformaActivitati(activitatiDb: EvidentaActivitate[]) {
-    console.log(activitatiDb);
-    const _activitati = activitatiDb.map((x) => ({
-      Id: x.subiect,
-      TodoId: x.idActivitate,
-      Summary: configureDetails(x.detalii),
+  // TODO: De setat perioada pt interogare din UI
+  function transformaActivitate(
+    activitate: EvidentaActivitate
+  ): IKanbanActivitate {
+    return {
+      Id: activitate.subiect,
+      TodoId: activitate.idActivitate,
+      Summary: configureDetails(activitate.detalii),
       ClassName: "",
-      Color: configureColor(x.prioritate),
-      Status: configureStatus(x.stare),
-      Tags: `Prioritate ${x.prioritateStr.toLowerCase()},`,
-    })) as IKanbanActivitate[];
-    setActivitati(_activitati);
+      Color: configureColor(activitate.prioritate),
+      Status: configureStatus(activitate.stare),
+      Tags: `Prioritate ${activitate.prioritateStr.toLowerCase()},`,
+      idDeviz: activitate.idDeviz,
+    };
+  }
+
+  async function onMount() {
+    try {
+      const response = await incarcaActivitati(account.token, interogare);
+      console.log(response.activitati[0].idActivitateInceputa)
+      dispatch(updateActivitati(response.activitati));
+    } catch (err) {
+      alertError(`A aparut o eroare la incarcarea activitatilor. ${err}`);
+    } finally {
+      dispatch(updateIsLoaded(true));
+    }
   }
 
   useEffect(() => {
-    incarcaActivitati(account.token, interogare)
-      .then((res) => transformaActivitati(res.activitati))
-      .catch((err) =>
-        alertError(`A aparut o eroare la incarcarea activitatilor. ${err}`)
-      )
-      .finally(() => setLoading(false));
-  }, []);
+    if (!activitatiState.isLoaded) {
+      onMount();
+      return;
+    }
 
-  const handleDoubleClick = (args: CardClickEventArgs) => {
-    console.log("click", args);
+    console.log(activitatiState.activitati[0], activitatiState.activitati[0].idActivitateInceputa)
+    if (
+      activitatiState.activitati.length === 1 &&
+      activitatiState.activitati[0].idActivitateInceputa !== 0
+    )
+      history.push(`/activitati/${activitatiState.activitati[0].idActivitate}`);
+  }, [activitatiState]);
+
+  const handleClick = (args: CardClickEventArgs) => {
     history.push(`/activitati/${args.data.TodoId}`);
   };
 
@@ -76,7 +97,7 @@ export default function ActivitatiController() {
     );
   };
 
-  if (loading)
+  if (activitatiState.isLoaded === false)
     return (
       <div className="text-center mt-5">
         <Spinner />
@@ -94,7 +115,9 @@ export default function ActivitatiController() {
               cssClass="kanban-header"
               id="kanban"
               keyField="Status"
-              dataSource={activitati}
+              dataSource={activitatiState.activitati.map((x) =>
+                transformaActivitate(x)
+              )}
               cardSettings={{
                 contentField: "Summary",
                 headerField: "Id",
@@ -103,7 +126,7 @@ export default function ActivitatiController() {
                 footerCssField: "ClassName",
               }}
               allowDragAndDrop={false}
-              cardDoubleClick={handleDoubleClick}
+              cardClick={handleClick}
               dialogOpen={(args) => (args.cancel = true)}
             >
               <ColumnsDirective>

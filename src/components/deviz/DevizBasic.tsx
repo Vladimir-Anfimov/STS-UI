@@ -9,10 +9,10 @@ import {
   FotoIcon,
 } from "./DevizIcons";
 import {
-  startActivitate,
-  stopActivitate,
   primestePersLegaturaDeviz,
   modificaCoordonate,
+  startActivitateDeviz,
+  stopActivitateDeviz,
 } from "../../api/devizeApi";
 import AccountContext from "../../store/AccountStore";
 import { jwtDecode } from "jwt-js-decode";
@@ -98,7 +98,7 @@ function DevizBasic({ deviz, setDeviz, changeHistory }: Props) {
 
   function handleStartActivitate() {
     setLoading(true);
-    startActivitate(account.token, {
+    startActivitateDeviz(account.token, {
       CodSal: Number(jwtDecode(account.token).payload.id),
       IdDecont: deviz.data!.idDeviz,
     })
@@ -137,8 +137,7 @@ function DevizBasic({ deviz, setDeviz, changeHistory }: Props) {
       );
     else {
       setLoading(true);
-      console.log(devizTemporaryState.ProcentFinalizare);
-      stopActivitate(account.token, {
+      stopActivitateDeviz(account.token, {
         CodSal: Number(jwtDecode(account.token).payload.id),
         IdDecont: deviz.data!.idDeviz,
         Observatii: devizTemporaryState.Observatii,
@@ -232,63 +231,57 @@ function DevizBasic({ deviz, setDeviz, changeHistory }: Props) {
               </span>
             </div>
           </div>
-          <div className="col col-12 mt-2 DEVIZ-DATA">
+          <div className="col col-12 mt-2 BTN-DATA">
             <span> {deviz.data!.client}</span>
             <span>{deviz.data!.denumirePunctDeLucru}</span>
-            {deviz.data!.idActivitateInceputa !== 0 && (
-              <div
-                style={window.innerWidth <= 768 ? { textAlign: "center" } : {}}
+            <div
+              style={window.innerWidth <= 768 ? { textAlign: "center" } : {}}
+            >
+              <button
+                data-backdrop="false"
+                data-toggle="modal"
+                data-target="#exampleModal3"
+                onClick={LoadPersoaneLegatura}
+                className="btn btn-primary btn-sm shadow col-5 col-lg-3"
               >
-                <button
-                  data-backdrop="false"
-                  data-toggle="modal"
-                  data-target="#exampleModal3"
-                  onClick={LoadPersoaneLegatura}
-                  className="btn btn-primary btn-sm shadow col-5 col-lg-3"
+                Persoane legatura
+              </button>
+              <button
+                className="btn btn-primary btn-sm shadow col-5 col-lg-3"
+                onClick={() => changeHistory("produs")}
+              >
+                Scaneaza produs{" "}
+              </button>
+              <PersoaneLegaturaModal
+                persoaneLegatura={persoaneLegatura}
+                persLoaded={persLoaded}
+              />
+              <hr />
+              <span>
+                <b>Latitudine:</b>{" "}
+                {deviz.data!.latitudinePunctDeLucru.toFixed(2)} &nbsp;
+                <b>Longitudine:</b>{" "}
+                {deviz.data!.longitudinePunctDeLucru.toFixed(2)}
+              </span>
+              <div className="row">
+                <a
+                  href={`http://maps.google.com/?q=${
+                    deviz.data!.latitudinePunctDeLucru
+                  },${deviz.data!.longitudinePunctDeLucru}`}
+                  target="_blank"
+                  className="btn BTN-PROGRAM btn-primary btn-sm shadow ml-4 col-5 col-lg-2"
                 >
-                  Persoane legatura
-                </button>
+                  Traseu
+                </a>
                 <button
-                  className="btn btn-primary btn-sm shadow col-5 col-lg-3"
-                  onClick={() => changeHistory("produs")}
+                  onClick={UpdateCoordonate}
+                  disabled={!locationEnabled}
+                  className="btn BTN-PROGRAM btn-secondary btn-sm shadow col-5 col-lg-2"
                 >
-                  Scaneaza produs{" "}
+                  Actualizeaza
                 </button>
-                <PersoaneLegaturaModal
-                  persoaneLegatura={persoaneLegatura}
-                  persLoaded={persLoaded}
-                />
-                {/* <ProductScannerModal 
-                                IdDecont={deviz.data!.idDeviz}
-                                CodSal={Number(jwtDecode(account.token).payload.id)} 
-                            /> */}
-                <hr />
-                <span>
-                  <b>Latitudine:</b>{" "}
-                  {deviz.data!.latitudinePunctDeLucru.toFixed(2)} &nbsp;
-                  <b>Longitudine:</b>{" "}
-                  {deviz.data!.longitudinePunctDeLucru.toFixed(2)}
-                </span>
-                <div className="row">
-                  <a
-                    href={`http://maps.google.com/?q=${
-                      deviz.data!.latitudinePunctDeLucru
-                    },${deviz.data!.longitudinePunctDeLucru}`}
-                    target="_blank"
-                    className="btn BTN-PROGRAM btn-primary btn-sm shadow ml-4 col-5 col-lg-2"
-                  >
-                    Traseu
-                  </a>
-                  <button
-                    onClick={UpdateCoordonate}
-                    disabled={!locationEnabled}
-                    className="btn BTN-PROGRAM btn-secondary btn-sm shadow col-5 col-lg-2"
-                  >
-                    Actualizeaza
-                  </button>
-                </div>
               </div>
-            )}
+            </div>
             <hr />
             {deviz.data!.idActivitateInceputa === 0 &&
               (loading === true ? (

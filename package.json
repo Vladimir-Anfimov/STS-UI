@@ -4,6 +4,7 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
     "@syncfusion/ej2-base": "^20.3.56",
     "@syncfusion/ej2-react-kanban": "^20.3.56",
     "bootstrap": "^4.5.2",
@@ -13,11 +14,12 @@
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.3.1",
     "react-qr-barcode-scanner": "^1.0.6",
+    "react-redux": "^7.1.0",
     "react-router-dom": "^5.2.0",
     "react-router-last-location": "^2.0.1",
     "react-scripts": "^3.4.3",
     "sweetalert2": "^9.17.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.10"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,6 +47,7 @@
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.45",
     "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.1.5",
     "html5-qrcode": "^2.2.1",
     "onchange": "^7.1.0"
