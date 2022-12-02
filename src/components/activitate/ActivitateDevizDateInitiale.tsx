@@ -21,7 +21,9 @@ export default function ActivitateDevizDateInitiale({ deviz }: IProps) {
         </div>
       </div>
       <div className="col col-12 mt-2 ACTIVITATI-DATA">
-        <span>{deviz.denumirePunctDeLucru}</span>
+        <span>
+          <b>Punct de lucru:</b> {deviz.denumirePunctDeLucru}
+        </span>
         <span>
           <b>Latitudine:</b> {deviz.latitudinePunctDeLucru.toFixed(2)} <br />
           <b>Longitudine:</b> {deviz.longitudinePunctDeLucru.toFixed(2)}

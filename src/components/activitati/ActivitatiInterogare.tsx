@@ -20,6 +20,7 @@ export default function ActivitatiInterogare({
       <div className="form-group">
         <label>De la</label>
         <DatePickerComponent
+          allowEdit={false}
           onChange={onChangeInterogare}
           id="datepicker"
           value={new Date(interogare.DeLa)}
@@ -31,6 +32,7 @@ export default function ActivitatiInterogare({
       <div className="form-group">
         <label>Pana la</label>
         <DatePickerComponent
+          allowEdit={false}
           onChange={onChangeInterogare}
           id="datepicker"
           value={new Date(interogare.PanaLa)}

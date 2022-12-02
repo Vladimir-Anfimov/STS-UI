@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import {
+  configureClassName,
   configureColor,
   configureDetails,
   configureStatus,
@@ -60,7 +61,7 @@ export default function ActivitatiKanban() {
       Id: subiect,
       TodoId: idActivitate,
       Summary: configureDetails(detalii),
-      ClassName: "",
+      ClassName: configureClassName(prioritate, idDeviz !== 0),
       Color: configureColor(prioritate),
       Status: configureStatus(stare),
       Tags:
@@ -135,11 +136,12 @@ export default function ActivitatiKanban() {
               />
             </ColumnsDirective>
           </KanbanComponent>
-          {activitatiState.activitati.length === 0 && activitatiState.isLoaded && (
-            <div className="text-center mt-4">
-              <h3>Nu există activități în perioada căutată.</h3>
-            </div>
-          )}
+          {activitatiState.activitati.length === 0 &&
+            activitatiState.isLoaded && (
+              <div className="text-center mt-4">
+                <h3>Nu există activități în perioada căutată.</h3>
+              </div>
+            )}
         </div>
       </div>
     </div>

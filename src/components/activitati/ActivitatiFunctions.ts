@@ -18,6 +18,14 @@ export const configureDetails = (detalii: string) => {
   return detalii;
 };
 
+export const configureClassName = (prioritate: number, is_deviz: boolean) => {
+  let format: string;
+  if (prioritate === 1) format = "e-low";
+  else if (prioritate === 2) format = "e-normal";
+  else format = "e-critical";
+  return format + (is_deviz ? " ,e-improvement" : " ,e-story");
+};
+
 export const initializeDateActivitati = (dataOne: string, dateTwo: string) => {
   let new_start = new Date(dataOne),
     end_start = new Date(dateTwo);
