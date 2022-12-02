@@ -48,43 +48,45 @@ export const Activitate_Observatii_Concluzii_ProcentFinalizare = ({
       </div>
       {isResponsabil && (
         <div className="form-group">
-          <label htmlFor="exampleFormControlTextarea2">Concluzie</label>
-          <textarea
-            autoComplete="off"
-            value={activitateInput.Concluzii}
-            onChange={(e) =>
-              setActivitateInput({
-                ...activitateInput,
-                Concluzii: e.target.value,
-              })
-            }
-            name="Concluzii"
-            className="form-control"
-            id="exampleFormControlTextarea2"
-            rows={3}
-          ></textarea>
           {isDeviz && (
-            <div className="form-group">
-              <label>Procent finalizare</label>
-              <select
-                value={activitateInput.ProcentFinalizare}
+            <>
+              <label htmlFor="exampleFormControlTextarea2">Concluzie</label>
+              <textarea
+                autoComplete="off"
+                value={activitateInput.Concluzii}
                 onChange={(e) =>
                   setActivitateInput({
                     ...activitateInput,
-                    ProcentFinalizare: +e.target.value,
+                    Concluzii: e.target.value,
                   })
                 }
-                name="ProcentFinalizare"
+                name="Concluzii"
                 className="form-control"
-              >
-                {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((procent) => (
-                  <option key={procent} value={procent}>
-                    {procent}%
-                  </option>
-                ))}
-              </select>
-            </div>
+                id="exampleFormControlTextarea2"
+                rows={3}
+              ></textarea>
+            </>
           )}
+          <div className="form-group">
+            <label>Procent finalizare</label>
+            <select
+              value={activitateInput.ProcentFinalizare}
+              onChange={(e) =>
+                setActivitateInput({
+                  ...activitateInput,
+                  ProcentFinalizare: +e.target.value,
+                })
+              }
+              name="ProcentFinalizare"
+              className="form-control"
+            >
+              {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((procent) => (
+                <option key={procent} value={procent}>
+                  {procent}%
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       )}
     </>

@@ -18,6 +18,7 @@ import ActivitateIncheiere from "./ActivitateIncheiere";
 import ActivitateDevizTehnic from "./ActivitateDevizSTS";
 import showGelocationError from "../../utils/GeolocationErrors";
 import ActivitateDevizImagineUpload from "./ActivitateDevizImagineUpload";
+import ActivitateInformatii from "./ActivitateInformatii";
 
 export default function ActivitateController() {
   const history = useHistory();
@@ -69,6 +70,7 @@ export default function ActivitateController() {
     );
   return (
     <ActivitateWrapper>
+      <ActivitateInformatii activitate={activitati[activitateIndex]} />
       {activitati[activitateIndex]?.dateDeviz !== null && (
         <>
           <ActivitateDevizDateInitiale

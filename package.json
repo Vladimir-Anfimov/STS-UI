@@ -6,6 +6,9 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
     "@syncfusion/ej2-base": "^20.3.56",
+    "@syncfusion/ej2-react-buttons": "^20.3.58",
+    "@syncfusion/ej2-react-calendars": "^20.3.59",
+    "@syncfusion/ej2-react-inputs": "^20.3.57",
     "@syncfusion/ej2-react-kanban": "^20.3.56",
     "bootstrap": "^4.5.2",
     "jwt-js-decode": "^1.4.1",

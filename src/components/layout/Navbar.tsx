@@ -49,10 +49,10 @@ function Navbar({ history }: any) {
             Activitati
             <BetaTag />
           </li>
-          <li onClick={() => history.push(`/devize`)}>
+          {/* <li onClick={() => history.push(`/devize`)}>
             <img src="https://img.icons8.com/wired/64/000000/add-list.png" />{" "}
             Ordin servici
-          </li>
+          </li> */}
           <li onClick={() => history.push(`/produse`)}>
             <img src="https://img.icons8.com/ios/50/000000/product--v2.png" />{" "}
             Produse
@@ -114,7 +114,7 @@ function Navbar({ history }: any) {
               Activitati
               <BetaTag />
             </a>
-            <a
+            {/* <a
               onClick={() => history.push(`/devize`)}
               className="nav-item nav-link active"
             >
@@ -123,7 +123,7 @@ function Navbar({ history }: any) {
                 src="https://img.icons8.com/wired/64/000000/add-list.png"
               />{" "}
               Ordin servici
-            </a>
+            </a> */}
             <a
               onClick={() => history.push(`/produse`)}
               className="nav-item nav-link active"

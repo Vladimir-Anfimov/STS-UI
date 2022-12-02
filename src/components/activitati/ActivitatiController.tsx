@@ -1,101 +1,70 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  KanbanComponent,
-  ColumnsDirective,
-  ColumnDirective,
-  CardClickEventArgs,
-} from "@syncfusion/ej2-react-kanban";
+import React, { useEffect, useContext, ChangeEvent } from "react";
 import "./kanban.css";
 import Spinner from "../layout/Spinner";
 import AccountContext from "../../store/AccountStore";
 import { jwtDecode } from "jwt-js-decode";
-import {
-  EvidentaActivitate,
-  IInterogareActivitati,
-  IKanbanActivitate,
-} from "./ActivitatiTypes";
-import {
-  configureColor,
-  configureDetails,
-  configureStatus,
-} from "./ActivitatiFunctions";
-import { useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   updateActivitati,
-  updateIsLoaded,
+  updateInterogare,
 } from "../../redux/slices/ActivitatiSlice";
 import { incarcaActivitati } from "../../api/activitatiApi";
-import { alertError } from "../../utils/AlertTypes";
+import { alertError, AlertNotification } from "../../utils/AlertTypes";
+import ActivitatiInterogare from "./ActivitatiInterogare";
+import { useHistory } from "react-router-dom";
+import ActivitatiKanban from "./ActivitatiKanban";
+import { initializeDateActivitati } from "./ActivitatiFunctions";
 
 export default function ActivitatiController() {
   const activitatiState = useAppSelector((state) => state.activitati);
   const dispatch = useAppDispatch();
-
   const history = useHistory();
-  const { account } = useContext<any>(AccountContext);
-  const [interogare, setInterogare] = useState<IInterogareActivitati>({
-    CodSal: Number(jwtDecode(account.token).payload.id),
-    DeLa: new Date(2022, 0, 1).toJSON(),
-    PanaLa: new Date(2022, 12, 31).toJSON(),
-  });
-  // TODO: De setat perioada pt interogare din UI
-  function transformaActivitate(
-    activitate: EvidentaActivitate
-  ): IKanbanActivitate {
-    return {
-      Id: activitate.subiect,
-      TodoId: activitate.idActivitate,
-      Summary: configureDetails(activitate.detalii),
-      ClassName: "",
-      Color: configureColor(activitate.prioritate),
-      Status: configureStatus(activitate.stare),
-      Tags: `Prioritate ${activitate.prioritateStr.toLowerCase()},`,
-      idDeviz: activitate.idDeviz,
-    };
-  }
 
-  async function onMount() {
+  const { account } = useContext<any>(AccountContext);
+
+  const onChangeInterogare = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      updateInterogare({
+        ...activitatiState.interogare,
+        [e.target.name]: new Date(e.target.value).toJSON(),
+      })
+    );
+  };
+
+  const onSubmitInterogare = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    requestListaActivitati();
+  };
+
+  async function requestListaActivitati(on_mount: boolean = false) {
     try {
-      const response = await incarcaActivitati(account.token, interogare);
-      console.log(response.activitati[0].idActivitateInceputa)
+      const response = await incarcaActivitati(account.token, {
+        ...initializeDateActivitati(
+          activitatiState.interogare.DeLa,
+          activitatiState.interogare.PanaLa
+        ),
+        CodSal: Number(jwtDecode(account.token).payload.id),
+      });
       dispatch(updateActivitati(response.activitati));
+      if (!on_mount)
+        AlertNotification("success", "Activitatile au fost incarcate.");
     } catch (err) {
       alertError(`A aparut o eroare la incarcarea activitatilor. ${err}`);
-    } finally {
-      dispatch(updateIsLoaded(true));
     }
   }
 
   useEffect(() => {
     if (!activitatiState.isLoaded) {
-      onMount();
+      requestListaActivitati(true);
       return;
     }
 
-    console.log(activitatiState.activitati[0], activitatiState.activitati[0].idActivitateInceputa)
     if (
       activitatiState.activitati.length === 1 &&
       activitatiState.activitati[0].idActivitateInceputa !== 0
     )
       history.push(`/activitati/${activitatiState.activitati[0].idActivitate}`);
   }, [activitatiState]);
-
-  const handleClick = (args: CardClickEventArgs) => {
-    history.push(`/activitati/${args.data.TodoId}`);
-  };
-
-  const columnTemplate = (props: { [key: string]: string }): JSX.Element => {
-    return (
-      <div
-        className="header-template-wrap"
-        style={{ cursor: "pointer", fontSize: 20 }}
-      >
-        <div className={"header-icon e-icons " + props.keyField}></div>
-        <div className="header-text">{props.headerText}</div>
-      </div>
-    );
-  };
 
   if (activitatiState.isLoaded === false)
     return (
@@ -108,48 +77,13 @@ export default function ActivitatiController() {
 
   return (
     <div className="jumbotron mt-4">
-      <div className="kanban-control-section">
-        <div className="control-section">
-          <div className="control-wrapper">
-            <KanbanComponent
-              cssClass="kanban-header"
-              id="kanban"
-              keyField="Status"
-              dataSource={activitatiState.activitati.map((x) =>
-                transformaActivitate(x)
-              )}
-              cardSettings={{
-                contentField: "Summary",
-                headerField: "Id",
-                tagsField: "Tags",
-                grabberField: "Color",
-                footerCssField: "ClassName",
-              }}
-              allowDragAndDrop={false}
-              cardClick={handleClick}
-              dialogOpen={(args) => (args.cancel = true)}
-            >
-              <ColumnsDirective>
-                <ColumnDirective
-                  headerText="Neincepute"
-                  keyField="Open"
-                  template={columnTemplate}
-                />
-                <ColumnDirective
-                  headerText="In desfasurare"
-                  keyField="InProgress"
-                  template={columnTemplate}
-                />
-                <ColumnDirective
-                  headerText="Incheiate"
-                  keyField="Close"
-                  template={columnTemplate}
-                />
-              </ColumnsDirective>
-            </KanbanComponent>
-          </div>
-        </div>
-      </div>
+      <ActivitatiInterogare
+        isLoaded={activitatiState.isLoaded}
+        onSubmitInterogare={onSubmitInterogare}
+        interogare={activitatiState.interogare}
+        onChangeInterogare={onChangeInterogare}
+      />
+      <ActivitatiKanban />
     </div>
   );
 }

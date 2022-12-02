@@ -12,6 +12,7 @@ export function incarcaActivitati(
   token: string,
   interogareActivitati: IInterogareActivitati
 ): Promise<{ activitati: EvidentaActivitate[] }> {
+  console.log(interogareActivitati);
   return fetch(apiURL + "/activitati/incarca", {
     method: "POST",
     headers: {

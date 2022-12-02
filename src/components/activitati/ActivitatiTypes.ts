@@ -54,7 +54,7 @@ export interface IKanbanActivitate {
   Summary: string;
   Tags: string;
   Color: string;
-  ClassName: "";
+  ClassName: string;
   TodoId: number;
   idDeviz: number;
 }
