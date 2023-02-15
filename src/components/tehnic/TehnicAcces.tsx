@@ -38,13 +38,13 @@ function TehnicAcces({ match, history }: any) {
         // PRIMESC ID PROIECT SI IL FOLOSESC LA MODIFICARE PAROLE
         if (res.parole.alarmaInstallerCode === "Neautorizat") {
           alertWarning("Proiectul nu a fost alocat.");
-          history.push("/devize");
+          history.push("/activitati");
         } else setData(res.parole);
       })
       .catch((err) => {
         console.log(err);
         alertError(`A aparut o eroare la cererea datelor la nivel de API.`);
-        history.push("/devize");
+        history.push("/activitati");
       });
   }, []);
 

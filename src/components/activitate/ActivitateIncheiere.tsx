@@ -61,7 +61,17 @@ export default function ActivitateIncheiere({
       });
       console.log(response);
       dispatch(updateIsLoaded(false));
-      AlertNotification("success", "Activitate incheiata cu succes.");
+      if (response.rezultat === -2) {
+        alertWarning(
+          `Exista alte persoane care inca nu au incheiat operatiunea, modificarile dvs. nu vor fi salvate. Cod: ${response.rezultat}`
+        );
+        return;
+      }
+
+      AlertNotification(
+        "success",
+        `Activitate incheiata cu succes. Cod: ${response.rezultat}`
+      );
       history.push("/activitati");
     } catch (err) {
       alertError("A aparut o eroare la incheierea activitatii. " + err);

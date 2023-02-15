@@ -28,8 +28,6 @@ function TehnicRaport({ match, history }: any) {
     return _class;
   }
 
-  const ChangeHistory = (url: string) => history.push(url);
-
   return (
     <>
       <div className="FIXED-BREADCRUMB d-flex justify-content-center pt-2 pb-2 bg-white shadow">
@@ -51,7 +49,6 @@ function TehnicRaport({ match, history }: any) {
 
       {tab === "chestionar" ? (
         <TehnicChestionar
-          ChangeHistory={ChangeHistory}
           chestionar={chestionar}
           setChestionar={setChestionar}
           id_deviz={id_deviz}
@@ -60,7 +57,6 @@ function TehnicRaport({ match, history }: any) {
         />
       ) : (
         <TehnicConstatari
-          ChangeHistory={ChangeHistory}
           constatari={constatari}
           setConstatari={setConstatari}
           id_deviz={id_deviz}

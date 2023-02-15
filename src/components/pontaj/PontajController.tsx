@@ -13,6 +13,7 @@ import {
 import { alertError } from "../../utils/AlertTypes";
 import { AfiseazaCitatRandom } from "../../utils/Citate";
 import showGelocationError from "../../utils/GeolocationErrors";
+import { NewsView } from "./NewsView";
 
 export interface Operatiune {
   CodSal: number;
@@ -87,8 +88,9 @@ function PontajController() {
     <div className="container">
       <div className="jumbotron mt-4">
         <h1 className="display-5">Bine ai venit!</h1>
-        <p className="lead">Spor la munca!</p>
+        <p className="lead">Spor la muncă!</p>
         <hr className="my-4" />
+        <NewsView />
         <p style={{ fontStyle: "italic" }}>{citat}</p>
         <ButtonDOM />
       </div>

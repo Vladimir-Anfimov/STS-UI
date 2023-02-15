@@ -21,7 +21,6 @@ interface IConstatariProps {
   setConstatari: Function;
   loadingConstatari: boolean;
   setLoadingConstatari: Function;
-  ChangeHistory: Function;
 }
 
 function TehnicConstatari({
@@ -30,7 +29,6 @@ function TehnicConstatari({
   setConstatari,
   loadingConstatari,
   setLoadingConstatari,
-  ChangeHistory,
 }: IConstatariProps) {
   const { account } = useContext<any>(AccountContext);
   const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);

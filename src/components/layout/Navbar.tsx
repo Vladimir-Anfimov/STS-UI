@@ -47,12 +47,7 @@ function Navbar({ history }: any) {
           <li onClick={() => history.push(`/activitati`)}>
             <img src="https://img.icons8.com/ios-glyphs/60/null/todo-list--v1.png" />
             Activitati
-            <BetaTag />
           </li>
-          {/* <li onClick={() => history.push(`/devize`)}>
-            <img src="https://img.icons8.com/wired/64/000000/add-list.png" />{" "}
-            Ordin servici
-          </li> */}
           <li onClick={() => history.push(`/produse`)}>
             <img src="https://img.icons8.com/ios/50/000000/product--v2.png" />{" "}
             Produse
@@ -60,6 +55,10 @@ function Navbar({ history }: any) {
           <li onClick={() => history.push(`/parteneri`)}>
             <img src="https://img.icons8.com/dotty/80/000000/teamwork.png" />{" "}
             Parteneri
+          </li>
+          <li onClick={() => history.push(`/feedback`)}>
+            <img src="https://img.icons8.com/ios/50/null/thumbs-up-down.png" />{" "}
+            Feedback & Sugestii <BetaTag />
           </li>
           <li onClick={() => history.push(`/setari`)}>
             <img src="https://img.icons8.com/ios/50/000000/settings--v1.png" />{" "}
@@ -112,18 +111,7 @@ function Navbar({ history }: any) {
                 src="https://img.icons8.com/ios-glyphs/60/null/todo-list--v1.png"
               />{" "}
               Activitati
-              <BetaTag />
             </a>
-            {/* <a
-              onClick={() => history.push(`/devize`)}
-              className="nav-item nav-link active"
-            >
-              <img
-                className="ICON-IMG-PHONE"
-                src="https://img.icons8.com/wired/64/000000/add-list.png"
-              />{" "}
-              Ordin servici
-            </a> */}
             <a
               onClick={() => history.push(`/produse`)}
               className="nav-item nav-link active"
@@ -143,6 +131,16 @@ function Navbar({ history }: any) {
                 src="https://img.icons8.com/dotty/80/000000/teamwork.png"
               />{" "}
               Parteneri
+            </a>
+            <a
+              onClick={() => history.push(`/feedback`)}
+              className="nav-item nav-link active"
+            >
+              <img
+                className="ICON-IMG-PHONE"
+                src="https://img.icons8.com/ios/50/null/thumbs-up-down.png"
+              />{" "}
+              Feedback & Sugestii <BetaTag />
             </a>
             <a
               onClick={() => history.push(`/setari`)}

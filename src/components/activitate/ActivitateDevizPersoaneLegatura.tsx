@@ -3,7 +3,7 @@ import { primestePersLegaturaDeviz } from "../../api/devizeApi";
 import AccountContext from "../../store/AccountStore";
 import { alertError } from "../../utils/AlertTypes";
 import { EvidentaDeviz } from "../activitati/ActivitatiTypes";
-import { PersoanaLegaturaDeviz } from "../deviz/DevizBasic";
+import { PersoanaLegaturaDeviz } from "../deviz/DevizTypes";
 import { PersoaneLegaturaModal } from "../deviz/PersoaneLegaturaModal";
 
 interface IProps {

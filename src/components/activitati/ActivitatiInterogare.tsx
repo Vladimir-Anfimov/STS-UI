@@ -27,6 +27,7 @@ export default function ActivitatiInterogare({
           format="dd-MM-yyyy"
           placeholder="Enter date"
           name="DeLa"
+          showClearButton={false}
         />
       </div>
       <div className="form-group">
@@ -39,6 +40,7 @@ export default function ActivitatiInterogare({
           format="dd-MM-yyyy"
           placeholder="Enter date"
           name="PanaLa"
+          showClearButton={false}
         />
       </div>
       <button

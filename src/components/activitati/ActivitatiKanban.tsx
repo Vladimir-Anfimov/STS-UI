@@ -21,8 +21,8 @@ export default function ActivitatiKanban() {
   const activitatiState = useAppSelector((state) => state.activitati);
   const [search, setSearch] = useState<string>("");
   const [kanban, setKanban] = useState(new Kanban());
-
   const history = useHistory();
+
   const handleClick = (args: CardClickEventArgs) => {
     history.push(`/activitati/${args.data.TodoId}`);
   };
@@ -34,7 +34,7 @@ export default function ActivitatiKanban() {
     if (searchValue !== "") {
       searchQuery = new Query().search(
         searchValue,
-        ["Tags", "Summary"],
+        ["Tags", "Id"],
         "contains",
         true
       );

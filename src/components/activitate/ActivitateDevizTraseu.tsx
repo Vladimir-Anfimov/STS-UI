@@ -9,7 +9,7 @@ import {
   EvidentaActivitate,
   EvidentaDeviz,
 } from "../activitati/ActivitatiTypes";
-import { IUpdateCoordonate } from "../deviz/DevizBasic";
+import { IUpdateCoordonate } from "../deviz/DevizTypes";
 
 interface IProps {
   deviz: EvidentaDeviz;

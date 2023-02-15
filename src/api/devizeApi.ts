@@ -1,14 +1,12 @@
 import { handleError, handleResponse, apiURL } from "./utilsApi";
-import {
-  IFilterGPS,
-  IncarcaDevize,
-} from "../components/devize/DevizeController";
 import { Deviz } from "../store/DevizeStore";
 import {
   IStartAct,
   IStopAct,
   IUpdateCoordonate,
-} from "../components/deviz/DevizBasic";
+  IFilterGPS,
+  IncarcaDevize,
+} from "../components/deviz/DevizTypes";
 import {
   IProdus,
   ITransferProdusAPI,

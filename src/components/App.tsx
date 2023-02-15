@@ -9,11 +9,9 @@ import {
   DEVIZE_ROLURI,
   PARTENERI_ROLURI,
 } from "../security/RoluriRute";
-import DevizeController from "./devize/DevizeController";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 // import 'bootstrap-css-only/css/bootstrap.min.css';
 import "mdbreact/dist/css/mdb.css";
-import DevizController from "./deviz/DevizController";
 import ParteneriController from "./parteneri/ParteneriController";
 import Partener from "./parteneri/Partner";
 import TehnicMenu from "./tehnic/TehnicMenu";
@@ -31,6 +29,7 @@ import ProductScanner from "./deviz/ProductScanner";
 import ProduseController from "./produse/ProduseController";
 import ActivitatiController from "./activitati/ActivitatiController";
 import ActivitateController from "./activitate/ActivitateController";
+import { FeedbackController } from "./feedback/FeedbackController";
 
 function App() {
   useEffect(() => {
@@ -85,19 +84,13 @@ function App() {
         exact
         component={PontajController}
       />
+      {/*  */}
       <PrivateRoute
-        requiredStartedPontaj={true}
-        requiredRoles={DEVIZE_ROLURI}
-        path="/devize/:id_deviz"
+        requiredStartedPontaj={false}
+        requiredRoles={PONTAJ_ROLURI}
+        path="/feedback"
         exact
-        component={DevizController}
-      />
-      <PrivateRoute
-        requiredStartedPontaj={true}
-        requiredRoles={DEVIZE_ROLURI}
-        path="/devize"
-        exact
-        component={DevizeController}
+        component={FeedbackController}
       />
       <PrivateRoute
         requiredStartedPontaj={true}

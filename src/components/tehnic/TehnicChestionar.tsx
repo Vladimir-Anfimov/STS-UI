@@ -7,6 +7,7 @@ import {
 } from "../../api/tehnicApi";
 import { alertError, alertSuccess, alertWarning } from "../../utils/AlertTypes";
 import Spinner from "../layout/Spinner";
+import { useHistory } from "react-router-dom";
 
 export interface Chestionar {
   idMentenanta: number;
@@ -23,7 +24,6 @@ interface IChestionarProps {
   setChestionar: Function;
   loadingChestionar: boolean;
   setLoadingChestionar: Function;
-  ChangeHistory: Function;
 }
 
 function TehnicChestionar({
@@ -32,10 +32,10 @@ function TehnicChestionar({
   setChestionar,
   loadingChestionar,
   setLoadingChestionar,
-  ChangeHistory,
 }: IChestionarProps) {
   const { account } = useContext<any>(AccountContext);
   const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
+  const history = useHistory();
 
   useEffect(() => {
     if (loadingChestionar !== false) {
@@ -50,7 +50,7 @@ function TehnicChestionar({
             alertWarning(
               "Chestionarul de la devizul respectiv nu mai este valabil."
             );
-            ChangeHistory("/devize");
+            history.push("/activitati");
           } else {
             setChestionar(res.chestionar);
             setLoadingChestionar(false);

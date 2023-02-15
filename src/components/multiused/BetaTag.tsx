@@ -9,7 +9,7 @@ export default function BetaTag() {
         display: "inline",
       }}
     >
-      &nbsp;&nbsp; TESTARE
+      &nbsp;&nbsp;NOU
     </span>
   );
 }

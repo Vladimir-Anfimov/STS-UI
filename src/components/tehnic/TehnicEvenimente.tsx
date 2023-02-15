@@ -41,7 +41,7 @@ function TehnicEvenimente({ match, history }: any) {
           alertWarning(
             "Evenimentele de la devizul respectiv nu mai sunt valabile."
           );
-          history.push("/devize");
+          history.push("/activitati");
         } else {
           setEvenimente(res.evenimente);
           setLoading(false);
