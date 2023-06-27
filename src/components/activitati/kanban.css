@@ -86,22 +86,22 @@
 }
 
 .e-kanban .e-card .e-card-footer .e-card-footer-css.e-improvement {
-    background-image: url(https://syncfusion.atlassian.net/secure/viewavatar?size=medium&avatarId=15507&avatarType=issuetype);
+    background-image: url(https://algosoft.ro:5001/img/inventory.png);
 }
 
 .e-kanban .e-card .e-card-footer .e-card-footer-css.e-story {
-    background-image: url(https://syncfusion.atlassian.net/secure/viewavatar?size=medium&avatarId=15515&avatarType=issuetype);
+    background-image: url(https://algosoft.ro:5001/img/task.png);
 }
 
 .e-kanban .e-card .e-card-footer .e-card-footer-css.e-bug {
     background-image: url(https://syncfusion.atlassian.net/secure/viewavatar?size=medium&avatarId=15503&avatarType=issuetype);
 }
 .e-kanban .e-card .e-card-footer .e-card-footer-css.e-low {
-    background-image: url(https://syncfusion.atlassian.net/images/icons/priorities/trivial.svg);
+    background-image: url(https://img.icons8.com/offices/256/low-priority.png);
 }
 
 .e-kanban .e-card .e-card-footer .e-card-footer-css.e-high {
-    background-image: url(https://syncfusion.atlassian.net/images/icons/priorities/major.svg);
+    background-image: url(https://img.icons8.com/color/256/high-priority.png);
 }
 
 .e-kanban .e-card .e-card-footer .e-card-footer-css.e-critical {
@@ -113,5 +113,5 @@
 }
 
 .e-kanban .e-card .e-card-footer .e-card-footer-css.e-normal {
-    background-image: url(https://syncfusion.atlassian.net/images/icons/priorities/minor.svg);
+    background-image: url(https://algosoft.ro:5001/img/medium_priority.png);
 }

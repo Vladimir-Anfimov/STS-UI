@@ -66,7 +66,9 @@ export default function ActivitatiKanban() {
       Status: configureStatus(stare),
       Tags:
         `Prioritate ${prioritateStr.toLowerCase()}, Client ${client},` +
-        (idDeviz !== 0 ? `Nr. deviz ${activitate.dateDeviz?.numarDeviz}` : ""),
+        (idDeviz !== 0
+          ? `Nr. deviz ${activitate.dateDeviz?.numarDeviz}, Punct de lucru: ${activitate.dateDeviz?.denumirePunctDeLucru}`
+          : ""),
       idDeviz,
     };
   }
