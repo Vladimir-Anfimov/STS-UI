@@ -56,8 +56,5 @@
     "@types/react-router-dom": "^5.1.5",
     "html5-qrcode": "^2.2.1",
     "onchange": "^7.1.0"
-  },
-  "engines": {
-    "node": ">=18"
   }
 }
